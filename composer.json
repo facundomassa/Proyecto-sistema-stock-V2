@@ -1,0 +1,20 @@
+{
+    "name": "facundo/proyecto-sistema-stock-v2",
+    "description": "Sistema de Stock V2",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Facundo\\ProyectoSistemaStockV2\\": "src/",
+            "Model\\" : "./models",
+            "MVC\\" : "./",
+            "Control\\" : "./controllers"
+        }
+    },
+    "authors": [
+        {
+            "name": "Megatiti",
+            "email": "massafacundo11@gmail.com"
+        }
+    ],
+    "require": {}
+}
