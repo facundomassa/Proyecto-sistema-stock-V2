@@ -10,12 +10,14 @@ class Paises extends ActiveRecord{
     public $id_paises;
     public $iso;
     public $nombre;
+    public $id;
 
     public function __construct($args = [])
     {
         $this->id_paises = $args["id_paises"] ?? null;
         $this->iso = $args["iso"] ?? "";
         $this->nombre = $args["nombre"] ?? "";
+        $this->id = $args["id_paises"] ?? null;
     }
 }
 

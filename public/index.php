@@ -7,6 +7,9 @@ use Control\UnidadesControl;
 use Control\TipoMaterialControl;
 use Control\EstadosControl;
 use Control\CentroStockControl;
+use Control\MaterialesControl;
+use Control\RemitoControl;
+use Control\MovimientoMaterialesControl;
 use MVC\Router;
 
 
@@ -46,6 +49,29 @@ $router->post("/CentroStock/crear", [CentroStockControl::class, "crear"]);
 $router->get("/CentroStock/actualizar", [CentroStockControl::class, "actualizar"]);
 $router->post("/CentroStock/actualizar", [CentroStockControl::class, "actualizar"]);
 $router->post("/CentroStock/eliminar", [CentroStockControl::class, "eliminar"]);
+//ajax
+$router->get("/CentroStock/buscarID", [CentroStockControl::class, "buscarID"]);
+
+$router->get("/Materiales", [MaterialesControl::class, "leer"]);
+$router->get("/Materiales/crear", [MaterialesControl::class, "crear"]);
+$router->post("/Materiales/crear", [MaterialesControl::class, "crear"]);
+$router->get("/Materiales/actualizar", [MaterialesControl::class, "actualizar"]);
+$router->post("/Materiales/actualizar", [MaterialesControl::class, "actualizar"]);
+$router->post("/Materiales/eliminar", [MaterialesControl::class, "eliminar"]);
+//ajax
+$router->get("/Materiales/buscar", [MaterialesControl::class, "buscarMateriales"]);
+
+$router->get("/Remito", [RemitoControl::class, "leer"]);
+$router->get("/Remito/crear", [RemitoControl::class, "crear"]);
+$router->post("/Remito/crear", [RemitoControl::class, "crear"]);
+$router->get("/Remito/ver", [RemitoControl::class, "ver"]);
+$router->get("/Remito/verAjax", [RemitoControl::class, "verAjax"]);
+$router->get("/Remito/verMateriales", [RemitoControl::class, "verMateriales"]);
+
+$router->get("/MovimientoMateriales", [MovimientoMaterialesControl::class, "leer"]);
+$router->get("/MovimientoMateriales/Crear", [MovimientoMaterialesControl::class, "crear"]);
+$router->post("/MovimientoMateriales/Crear", [MovimientoMaterialesControl::class, "crearMultiples"]);
+
 
 $router->comprobarRutas();
 

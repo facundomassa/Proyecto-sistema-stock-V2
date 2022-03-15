@@ -10,12 +10,14 @@ class TipoCentroStock extends ActiveRecord{
     public $id_tipo_centro_stock;
     public $tipo;
     public $operacion;
+    public $id;
 
     public function __construct($args = [])
     {
         $this->id_tipo_centro_stock = $args["id_tipo_centro_stock"] ?? null;
         $this->tipo = $args["tipo"] ?? "";
         $this->operacion = $args["operacion"] ?? "";
+        $this->id = $args["id_tipo_centro_stock"] ?? null;
     }
 
     public function validar(){
@@ -29,6 +31,10 @@ class TipoCentroStock extends ActiveRecord{
         return self::$errores;
     }
 
+    public static function actualizarID($objeto){
+        $objeto->id = $objeto->id_tipo_centro_stock ;
+        return $objeto;
+    }
 }
 
 ?>

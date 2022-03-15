@@ -9,11 +9,13 @@ class Unidades extends ActiveRecord{
 
     public $id_unidades;
     public $unidad;
+    public $id;
 
     public function __construct($args = [])
     {
         $this->id_unidades = $args["id_unidades"] ?? null;
         $this->unidad = $args["unidad"] ?? "";
+        $this->id = $args["id_unidades"] ?? null;
     }
 
     public function validar(){
@@ -23,7 +25,11 @@ class Unidades extends ActiveRecord{
         }
         return self::$errores;
     }
-
+    
+    public static function actualizarID($objeto){
+        $objeto->id = $objeto->id_unidades ;
+        return $objeto;
+    }
 }
 
 ?>

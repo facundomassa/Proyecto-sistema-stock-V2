@@ -1,3 +1,5 @@
+<label for="nombre_cs">Nombre del centro de sotck: *</label>
+<input type="text" id="nombre_cs" name="CentrosStock[nombre_cs]" placeholder="Nombre del centro de stock" value="<?php echo s($centrosStock->nombre_cs); ?>">
 <label for="remitente_nombre">Nombre del remitente: *</label>
 <input type="text" id="remitente_nombre" name="CentrosStock[remitente_nombre]" placeholder="Nombre" value="<?php echo s($centrosStock->remitente_nombre); ?>">
 <label for="remitente_apellido">Apellido</label>

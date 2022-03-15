@@ -1,0 +1,29 @@
+.header{
+    background-color: red;
+    display: flex;
+    img{
+        height: 8rem;
+        width: 8rem;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 4rem;
+        &:hover{
+            
+            background-color: rgba(128, 128, 128, 0.5);
+            cursor: pointer;
+        }
+    }
+    #boton_menu{
+        height: 5rem;
+        width: 5rem;
+        margin: 2rem;
+        border-radius: 1rem;
+        &:hover{
+            background-color: gray;
+            cursor: pointer;
+        }
+    }
+    h1{
+        margin: auto;
+    }
+}

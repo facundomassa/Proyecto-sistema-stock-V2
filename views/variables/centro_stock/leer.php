@@ -11,6 +11,7 @@
         <tr>
             <th>ID</th>
             <th>TIPO</th>
+            <th>NOMBRE CENTRO SOTCK</th>
             <th>NOMBRE</th>
             <th>TELEFONO</th>
             <th>PAIS</th>
@@ -25,6 +26,7 @@
         <tr>
             <td><?php echo $valor->id_centros_stock ?></td>
             <td><?php echo $valor->tipo ?></td>
+            <td><?php echo $valor->nombre_cs ?></td>
             <td><?php echo $valor->remitente_nombre . " " . $valor->remitente_apellido ?></td>
             <td><?php echo $valor->telefono ?></td>
             <td><?php echo $valor->nombre ?></td>

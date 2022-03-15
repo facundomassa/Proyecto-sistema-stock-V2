@@ -6,7 +6,7 @@ class CentrosStock extends ActiveRecord{
     protected static $tabla = "centros_stock";
     protected static $tablaSeg = "tipo_centro_stock";
     protected static $tablaTer = "paises";
-    protected static $columnasBD = ["id_centros_stock", "tipo_stock_id", "remitente_nombre", "remitente_apellido", "telefono", "pais", "provincia", "ciudad", "codigo_postal", "direccion"];
+    protected static $columnasBD = ["id_centros_stock", "tipo_stock_id", "remitente_nombre", "remitente_apellido", "telefono", "pais", "provincia", "ciudad", "codigo_postal", "direccion", "nombre_cs"];
     protected static $id_name = "id_centros_stock";
 
     public $id_centros_stock;
@@ -19,6 +19,7 @@ class CentrosStock extends ActiveRecord{
     public $ciudad;
     public $codigo_postal;
     public $direccion;
+    public $nombre_cs;
     public $tipo;
     public $operacion;
     public $nombre;
@@ -36,10 +37,11 @@ class CentrosStock extends ActiveRecord{
         $this->ciudad = $args["ciudad"] ?? "";
         $this->codigo_postal = $args["codigo_postal"] ?? "";
         $this->direccion = $args["direccion"] ?? "";
+        $this->nombre_cs = $args["nombre_cs"] ?? "";
         $this->tipo = $args["tipo"] ?? "";
         $this->operacion = $args["operacion"] ?? "";
         $this->nombre = $args["nombre"] ?? "";
-        $this->id = $this->id_centros_stock;
+        $this->id = $args["id_centros_stock"] ?? null;
     }
 
     public function validar(){
@@ -65,6 +67,9 @@ class CentrosStock extends ActiveRecord{
         if (!$this->direccion) {
             self::$errores[] = "Falta la direccion";
         }
+        if (!$this->nombre_cs) {
+            self::$errores[] = "Agregale un nombre al Centro de Stock";
+        }
         return self::$errores;
     }
     
@@ -74,6 +79,11 @@ class CentrosStock extends ActiveRecord{
         $resultado = self::consultarSQL($query);
         
         return $resultado;
+    }
+
+    public static function actualizarID($objeto){
+        $objeto->id = $objeto->id_centros_stock ;
+        return $objeto;
     }
 }
 

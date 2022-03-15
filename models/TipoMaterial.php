@@ -9,11 +9,13 @@ class TipoMaterial extends ActiveRecord{
 
     public $id_tipo_material;
     public $tipo;
+    public $id;
 
     public function __construct($args = [])
     {
         $this->id_tipo_material = $args["id_tipo_material"] ?? null;
         $this->tipo = $args["tipo"] ?? "";
+        $this->id = $args["id_centros_stock"] ?? null;
     }
 
     public function validar(){
@@ -24,6 +26,10 @@ class TipoMaterial extends ActiveRecord{
         return self::$errores;
     }
 
+    public static function actualizarID($objeto){
+        $objeto->id = $objeto->id_tipo_material ;
+        return $objeto;
+    }
 }
 
 ?>
