@@ -33,7 +33,7 @@ class Router {
         }
 
         //proteger las rutas
-        if(in_array($urlActual, $rutas_protegidas) && !$auth){
+        if($urlActual != "/" && !$auth){
             header("location: /");
         }
         
@@ -48,7 +48,7 @@ class Router {
     }
 
     //muestra una vista
-    public function render($view, $datos = [], $layout = true){
+    public function render($view, $datos = []){
         foreach($datos as $key => $value){
             $$key = $value;
         }
@@ -56,8 +56,6 @@ class Router {
         ob_start(); //almacenar en memoria durante un tiiempo
         include __DIR__ . "/views/$view.php";
         $contenido = ob_get_clean(); // limpiar el buffer
-        if($layout){
-            include __DIR__ . "/views/layout.php";
-        }
+        include __DIR__ . "/views/layout.php";
     }
 }

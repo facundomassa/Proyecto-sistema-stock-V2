@@ -1,13 +1,27 @@
+<?php
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    $auth = $_SESSION["login"] ?? null;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="/build/css/app.css">
     <!-- CDN CSS Datatable -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="/build/css/app.css">
+    <!-- boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Stock</title>
 </head>
 <body>
@@ -20,6 +34,9 @@
     </header>
     <nav class="navegador">
         <ul class="nav_list">
+            <li>
+                <a href="/Stock">Stock</a>
+            </li>
             <li>
                 <a href="/Remito">Remitos</a>
             </li>
@@ -45,8 +62,13 @@
                 <a href="/TipoMaterial">Tipo de Materiales</a>
             </li>
         </ul>
+        <div class="logout">
+            <a class="btns btn-cerrarS" href="/logout">Cerrar Seccion</a>
+        </div>
     </nav>
+    
     <main class="main">
+        <img class="volver" onClick="history.go(-1);" src="/build/img/flecha-return.png" alt="volver atras">
         <div class="contenedor">
             <?php echo $contenido; ?>
         </div>

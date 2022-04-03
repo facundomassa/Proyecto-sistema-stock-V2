@@ -23,7 +23,7 @@
     <tbody>
         <?PHP foreach($valores as $valor){ ?>
         <tr>
-            <td><?php echo '<a href="/Remito/ver?id=' . $valor->id_remito . '">'. $valor->id_remito ?></td>
+            <td><?php echo '<a href="/Remito/ver?id=' . $valor->id_remito . '">'. $valor->id_remito ?> <i class='bx bx-search'></i></td>
             <?PHP foreach($centrosStock as $centroStock){ ?>
             <?php if($centroStock->id_centros_stock == $valor->origen_id){echo "<td>" . '<a href="/CentroStock/actualizar?id=' . $centroStock->id_centros_stock . '">' . $centroStock->direccion . "</a></td>"; }?>
             <?PHP } ?>
@@ -33,7 +33,7 @@
             <td><?php echo $valor->nombre ?></td>
             <td><?php echo $valor->estado ?></td>
             <td> 
-                <?php if($valor->estado != "FINALIZADO" || $valor->estado != "CANCELADO"){ ?>
+                <?php if($valor->estado != "FINALIZADO"){ ?>
                     <a href="/MovimientoMateriales/Crear?id=<?php echo $valor->id_remito; ?>">Agregar Materiales</a>
                 <?php }?>
             </td>
@@ -42,4 +42,4 @@
     </tbody>
     
 </table>
-<a href="/Remito/crear">CREAR</a>
+<a class="btns crear" href="/Remito/crear">CREAR</a>

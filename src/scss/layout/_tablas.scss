@@ -1,0 +1,88 @@
+table{
+    background-color: lightsteelblue;
+    border: 1px solid gray;
+    border-bottom: 1px solid gray !important;
+    border-radius: 5px;
+    vertical-align: middle; 
+    width: 100%;
+    border-spacing: 0;
+    box-sizing: content-box;
+    thead{
+        
+        tr th{
+            text-align: center;
+            font-size: 16px;
+            padding: 5px 10px;
+            border-bottom: 2px solid #acbad5;
+        }
+    } 
+        
+    tbody{
+        
+        td{
+            padding: 5px 10px;
+            border-bottom: 2px solid #acbad5;
+        }
+        tr:nth-child(even) {
+            background-color: #eee;
+        }
+        
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        tr.a_eliminar{
+            background-color: gray;
+            color: lightgray;
+        }
+    }
+}
+
+.dataTables_length{
+    float: left;
+    margin-bottom: 15px;
+    label{
+        font-size: 14px;
+        select{
+            text-transform: none;
+            border-radius: 20px;
+            text-align: center;
+            padding: 2px;
+        }
+    }
+}
+.dataTables_wrapper{
+    clear: both;
+    &:after {
+        visibility: hidden;
+        display: block;
+        content: "";
+        clear: both;
+        height: 0;
+    }
+}
+.dataTables_filter{
+    float: right;
+    margin-bottom: 15px;
+}
+.dataTables_paginate{
+    margin-top: 15px;
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+    .paginate_button{
+        border-radius: 50% !important;
+        &.disable{
+            cursor: default;
+            color: #666 !important;
+            border: 1px solid transparent;
+            background: transparent;
+            box-shadow: none;
+        }
+    }       
+}
+.dataTables_info{
+    margin-top: 15px;
+    clear: both;
+    float: left;
+    padding-top: 0.755em;
+}

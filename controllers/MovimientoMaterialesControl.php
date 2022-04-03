@@ -7,6 +7,8 @@ use Model\Remito;
 use Model\Materiales;
 use Model\CentrosStock;
 use Model\MovimientoMateriales;
+use Model\TipoMaterial;
+use Model\Unidades;
 
 class MovimientoMaterialesControl{
 
@@ -55,26 +57,40 @@ class MovimientoMaterialesControl{
     public static function crear(Router $router){
         $MovimientoMateriales = new MovimientoMateriales();
 
+        $id = validarID("/MovimientoMateriales");
+
+        $MaterialesEnviados = [];
+
+        $TodosLosMovimientos = MovimientoMateriales::findDatos($id, "remito_id");
+        foreach($TodosLosMovimientos as $key => $value){
+            $MaterialesEnviados[] = Materiales::findID($value->material_id);
+            $MaterialesEnviados[$key]->unidad = Unidades::findID($MaterialesEnviados[$key]->unidad_id)->unidad;
+            $MaterialesEnviados[$key]->tipo = TipoMaterial::findID($MaterialesEnviados[$key]->tipo_id)->tipo;
+            $MaterialesEnviados[$key]->cantidad = $value->cantidad;
+            $MaterialesEnviados[$key]->id_movimiento_materiales = $value->id_movimiento_materiales;
+        }
+        
         //arreglo con msj de errores
         $errores = MovimientoMateriales::getErorres();
 
-        $Materiales = Materiales::findDatos();
-        // if($_SERVER["REQUEST_METHOD"] === "POST"){
-        //     //crea una nueva instancia y se pasa los arg
-        //     $MovimientoMateriales = new MovimientoMateriales($_POST["MovimientoMateriales"]);
-        //     //llamamos a los errores
-        //     $errores = $MovimientoMateriales->validar();
-        //     //validamos id sean enteros
+        $Materiales = Materiales::getAll();
+        if($_SERVER["REQUEST_METHOD"] === "POST"){
+            //crea una nueva instancia y se pasa los arg
+            $MovimientoMateriales = new MovimientoMateriales($_POST["MovimientoMateriales"]);
+            //llamamos a los errores
+            $errores = $MovimientoMateriales->validar();
+            //validamos id sean enteros
             
-        //     if(empty($errores)){
-        //         //comprobamos que las id exitan
-        //         //insertamos
-        //         $MovimientoMateriales->guardarMultiples();
-        //     }
-        // }
+            if(empty($errores)){
+                //comprobamos que las id exitan
+                //insertamos
+                $MovimientoMateriales->guardarMultiples();
+            }
+        }
 
         $router->render("variables/movimiento_materiales/crear",[
             "MovimientoMateriales" => $MovimientoMateriales,
+            "MaterialesEnviados" => $MaterialesEnviados,
             "Materiales" => $Materiales,
             "errores" => $errores
         ]);
@@ -88,7 +104,14 @@ class MovimientoMaterialesControl{
 
         if($_SERVER["REQUEST_METHOD"] === "POST"){
             //crea una nueva instancia y se pasa los arg
-            $MovimientoMateriales = new MovimientoMateriales($_POST["MovimientoMateriales"]);
+            $args = $_POST["MovimientoMateriales"];
+            if(isset($args["id_movimiento_materiales"])){
+                $args[MovimientoMateriales::nombreID()] = $args["id_movimiento_materiales"];
+                $args["id"] = $args["id_movimiento_materiales"];
+                $MovimientoMateriales->sincronizar($args);
+            } else {
+                $MovimientoMateriales = new MovimientoMateriales($_POST["MovimientoMateriales"]);
+            }
             //llamamos a los errores
             $errores = $MovimientoMateriales->validar();
             //validamos id sean enteros
@@ -96,6 +119,8 @@ class MovimientoMaterialesControl{
                 //comprobamos que las id exitan
                 //insertamos
                 $MovimientoMateriales->guardarMultiples();
+            } else{
+                echo $errores;
             }
         }
     }
@@ -107,7 +132,7 @@ class MovimientoMaterialesControl{
             
             if($id){
                 $MovimientoMateriales = MovimientoMateriales::findID($id);
-                $MovimientoMateriales->eliminar("/MovimientoMateriales");
+                $MovimientoMateriales->eliminarMultiple("/MovimientoMateriales");
             }
         }
     }

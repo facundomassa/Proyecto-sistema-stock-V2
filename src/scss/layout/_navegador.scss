@@ -4,7 +4,12 @@
     top: 0;
     width: 0;
     height: 100vh; 
-    background: red;
+    z-index: 1;
+    background: rgb(218,0,0);
+    background: -moz-linear-gradient(0deg, rgba(218,0,0,1) 0%, rgba(243,0,0,1) 5%, rgba(255,0,0,1) 90%, rgba(218,0,0,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(218,0,0,1) 0%, rgba(243,0,0,1) 5%, rgba(255,0,0,1) 90%, rgba(218,0,0,1) 100%);
+    background: linear-gradient(0deg, rgba(218,0,0,1) 0%, rgba(243,0,0,1) 5%, rgba(255,0,0,1) 90%, rgba(218,0,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#da0000",endColorstr="#da0000",GradientType=1);
     transition: all .5s ease;
     overflow: hidden;
     .nav_list{
@@ -20,10 +25,10 @@
             list-style-type: none;
             width: 100%;
             margin: 0;
-            padding: 1rem;
             a{
                 display: block;
                 color: white;
+                padding: 1rem;
                 text-shadow: 1px 1px black;
             }
             &:hover{
@@ -33,7 +38,8 @@
     }
     &.show{
         display: block;
-        width: 15rem;
+        width: 15%;
+        min-width: 15rem;
         .nav_list{
             visibility: visible;
             opacity: 1;
@@ -48,7 +54,21 @@
     left: 0;
     transition: all .5s ease;
     &.show{
-        
         width: calc(100% - 15rem);
+        @include desktop{
+            
+            width: 85%;
+        }
     }
+}
+.logout{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    left: 0;
+    min-width: 15rem;
+    width: 100%;
+    z-index: -1;
 }

@@ -1,3 +1,16 @@
+function EliminarMaterial(e){
+    // e.preventDefault();
+    const check = $(e).siblings("#eliminarChek");
+    console.log(check.prop("checked"));
+    if(check.prop("checked")){
+        check.parent().parent().removeClass("a_eliminar");
+        check.prop('checked', false);
+    } else {
+        check.prop('checked', true);
+        check.parent().parent().addClass("a_eliminar");
+    }
+}
+
 $(document).ready(function () {
     const agregarBtn = $("#agregarMat");
     const agregarlosBtn = $("#agregarlosMat");
@@ -9,6 +22,8 @@ $(document).ready(function () {
         ayudaBtn.removeClass("hidden");
     });
 
+    
+    //funciion para obtener los get
     function getParameterByName(name, url=window.location.href) {
         name = name.replace(/[\[\]]/g, "\\$&");
         var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -21,8 +36,7 @@ $(document).ready(function () {
     agregarlosBtn.click(function(e){
         e.preventDefault();
         ayudaBtn.addClass("hidden");
-        
-        $("input:checkbox:checked").each(function(){
+        todosMateriales.find("input:checkbox:checked").each(function(){
             const checks = this.value;
             $.ajax({
                 type: "get",
@@ -39,9 +53,15 @@ $(document).ready(function () {
                         <td>${respuesta.Unidades.unidad}</td>
                         <td>${respuesta.TipoMaterial.tipo}</td>
                         <td><input type="number" name="MovimientoMateriales[cantidad]" id="cantidad" min="0"></td>
+                        <td>
+                        <input type="button" value="Eliminar" class="eliminarMaterial" onclick="EliminarMaterial(this);">
+                            <input type="checkbox" name="MovimientoMateriales[eliminar]" id="eliminarChek" value="">
+                        </td>
                     </tr>
                     `);
                 }
+            }).promise().done(function () {
+                todosMateriales.find("input:checkbox:checked").prop('checked', false);
             });
         });
     })
@@ -50,27 +70,43 @@ $(document).ready(function () {
         e.preventDefault();
         let totalCantidad = 0;
         let cantidadCorrecta = 0;
+        const remito_id = getParameterByName('id');
         $("#tablaMateriales").find("tr").each(function(){
-            const id = $(this).find(".valor").text();
+            const id_movimiento_materiales = $(this).find("#MovimientoMateriales").val();            
+            const material_id = $(this).find(".valor").text();
             const cantidad = $(this).find("#cantidad").val();
-            const remito_id = getParameterByName('id');
-            const form = {"MovimientoMateriales" : {"remito_id" : remito_id,"material_id": id, "cantidad": cantidad}};
+            const eliminar = $(this).find("#eliminarChek").prop('checked');
+            const form = {"MovimientoMateriales" : {"id_movimiento_materiales" : id_movimiento_materiales, "remito_id" : remito_id,"material_id": material_id, "cantidad": cantidad}};
             totalCantidad ++;
-            $.ajax({
-                type: "post",
-                url: "/MovimientoMateriales/Crear",
-                data: form,
-                async: false,
-                success: function (response) {
-                    
-                    if(response == "CORRECTO"){
-                        cantidadCorrecta ++;
-                        console.log(cantidadCorrecta);
+            if(eliminar){
+                $.ajax({
+                    type: "post",
+                    url: "/MovimientoMateriales/eliminar",
+                    data: {"id" : id_movimiento_materiales},
+                    async: false,
+                    success: function (response) {
+                        if(response == "CORRECTO"){
+                            cantidadCorrecta ++;
+                            console.log(cantidadCorrecta);
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "/MovimientoMateriales/Crear",
+                    data: form,
+                    async: false,
+                    success: function (response) {
+                        if(response == "CORRECTO"){
+                            cantidadCorrecta ++;
+                            console.log(cantidadCorrecta);
+                        }
+                    }
+                })
+            }
         }).promise().done(function () {
-            
-         });
+            window.location = `/MovimientoMateriales/Crear?id=${remito_id}&valC=${cantidadCorrecta}&valT=${cantidadCorrecta}`;
+        });
     })
 });

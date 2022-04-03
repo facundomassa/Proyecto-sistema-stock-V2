@@ -104,7 +104,6 @@ class RemitoControl{
 
     public static function crear(Router $router){
         $Remito = new Remito();
-
         //arreglo con msj de errores
         $errores = Remito::getErorres();
 
@@ -127,13 +126,60 @@ class RemitoControl{
                     $errores[] = "Usuario incorrecto";
                 } else{
                     //insertamos
-                    $Remito->guardar("/MovimientoMateriales/Crear?id=" . $NumeroRemito);
+                    $Remito->guardar("/Remito/ver?id=" . $NumeroRemito);
                 }
                 
             }
         }
 
         $router->render("variables/remito/crear",[
+            "remito" => $Remito,
+            "estados" => $Estados,
+            "NumeroRemitoFinal" => $NumeroRemito,
+            "centrosStock" => $CentrosStock,
+            "errores" => $errores
+        ]);
+    }
+
+    public static function actualizar(Router $router){
+
+        $id = validarID("/Remito");
+
+        $Remito = Remito::findID($id);
+        //arreglo con msj de errores
+        $errores = Remito::getErorres();
+
+        $CentrosStock = CentrosStock::getAll();
+        $NumeroRemito = $id;
+        $Estados = Estados::getAll();
+        if($_SERVER["REQUEST_METHOD"] === "POST"){
+            //crea una nueva instancia y se pasa los arg
+            $args = $_POST["Remito"];
+            $args[Remito::nombreID()] = $id;
+            $args["id"] = $id;
+            //sincronizamos datos de la pagina al objeto
+            $Remito->sincronizar($args);
+            //llamamos a los errores
+            $errores = $Remito->validar();
+
+            if(empty($errores)){
+                //comprobamos que las id exitan
+                if(!CentrosStock::findID($Remito->origen_id) || !CentrosStock::findID($Remito->destino_id)){
+                    $errores[] = "Algun Centro Stock Inescitente";
+                } else if(!Estados::findID($Remito->estado_id)){
+                    $errores[] = "Estado incorrecto";
+                } else if(!Usuarios::findID($Remito->creado_por_id)){
+                    $errores[] = "Usuario incorrecto";
+                } else{
+                    //insertamos
+                    
+                    $Remito->guardar("/Remito/ver?id=" . $NumeroRemito);
+                }
+                
+            }
+        }
+
+        $router->render("variables/remito/actualizar",[
             "remito" => $Remito,
             "estados" => $Estados,
             "NumeroRemitoFinal" => $NumeroRemito,
@@ -153,6 +199,8 @@ class RemitoControl{
             }
         }
     }
+
+    
 }
 
 ?>

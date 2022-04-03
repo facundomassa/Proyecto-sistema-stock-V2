@@ -9,17 +9,17 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>ESTADOS</th>
-            <th>ACCIONES</th>
+            <th class="width-2">ID</th>
+            <th class="width-6">ESTADOS</th>
+            <th class="width-2">ACCIONES</th>
         </tr> 
     </thead>
     <tbody>
         <?PHP foreach($valores as $valor){ ?>
         <tr>
-            <td><?php echo $valor->id ?></td>
+            <td class="textC"><?php echo $valor->id ?></td>
             <td><?php echo $valor->estado ?></td>
-            <td>
+            <td class="textC">
                 <form method="POST" action="/Estados/eliminar">
                     <input type="hidden" name="id" value="<?php echo $valor->id; ?>">
                     <input type="submit" class="boton-rojo-block" value="Eliminar">
@@ -31,4 +31,4 @@
     </tbody>
     
 </table>
-<a href="/Estados/crear">CREAR</a>
+<a class="btns crear" href="/Estados/crear">CREAR</a>

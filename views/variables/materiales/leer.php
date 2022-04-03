@@ -9,12 +9,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>CODIGO</th>
-            <th>DESCRIPCION</th>
-            <th>UNIDAD</th>
-            <th>TIPO</th>
-            <th>ACCIONES</th>
+            <th class="width-1">ID</th>
+            <th class="width-2">CODIGO</th>
+            <th class="width-3">DESCRIPCION</th>
+            <th class="width-1">UNIDAD</th>
+            <th class="width-2">TIPO</th>
+            <th class="width-1">ACCIONES</th>
         </tr> 
     </thead>
     <tbody>
@@ -37,4 +37,4 @@
     </tbody>
     
 </table>
-<a href="/Materiales/crear">CREAR</a>
+<a class="btns crear" href="/Materiales/crear">CREAR</a>

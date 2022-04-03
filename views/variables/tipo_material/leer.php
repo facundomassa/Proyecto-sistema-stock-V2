@@ -9,9 +9,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>TIPO</th>
-            <th>ACCIONES</th>
+            <th class="width-2">ID</th>
+            <th class="width-6">TIPO</th>
+            <th class="width-2">ACCIONES</th>
         </tr> 
     </thead>
     <tbody>
@@ -31,4 +31,4 @@
     </tbody>
     
 </table>
-<a href="/TipoMaterial/crear">CREAR</a>
+<a class="btns crear" class="button" href="/TipoMaterial/crear">CREAR</a>

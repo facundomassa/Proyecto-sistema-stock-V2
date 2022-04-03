@@ -22,3 +22,12 @@
     </div>
     
 </section>
+<?php 
+    if($Estado->estado != "FINALIZADO"){ ?>
+        <a class="btns" href="/Remito/actualizar?id=<?php echo $Remito->id_remito ?>">Modificar Orden</a>
+        <form action="/Stock/FinalizarOrden" method="post">
+            <input type="hidden" name="id" value="<?php echo $Remito->id_remito ?>">
+            <input class="btns" type="submit" value="Finalizar Orden">.
+        </form>
+    <?php }
+?>

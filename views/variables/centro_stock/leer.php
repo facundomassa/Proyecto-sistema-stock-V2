@@ -10,21 +10,21 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>TIPO</th>
-            <th>NOMBRE CENTRO SOTCK</th>
-            <th>NOMBRE</th>
-            <th>TELEFONO</th>
-            <th>PAIS</th>
-            <th>PROVINCIA</th>
-            <th>CIUDAD</th>
-            <th>DIRECCION</th>
-            <th>ACCIONES</th>
+            <th class="width-1">TIPO</th>
+            <th class="width-2">NOMBRE CENTRO SOTCK</th>
+            <th class="width-1">NOMBRE</th>
+            <th class="width-1">TELEFONO</th>
+            <th class="width-1">PAIS</th>
+            <th class="width-1">PROVINCIA</th>
+            <th class="width-1">CIUDAD</th>
+            <th class="width-1">DIRECCION</th>
+            <th class="width-1">ACCIONES</th>
         </tr> 
     </thead>
     <tbody>
         <?PHP foreach($valores as $valor){ ?>
         <tr>
-            <td><?php echo $valor->id_centros_stock ?></td>
+            <td class="textC"><?php echo $valor->id_centros_stock ?></td>
             <td><?php echo $valor->tipo ?></td>
             <td><?php echo $valor->nombre_cs ?></td>
             <td><?php echo $valor->remitente_nombre . " " . $valor->remitente_apellido ?></td>
@@ -33,7 +33,7 @@
             <td><?php echo $valor->provincia ?></td>
             <td><?php echo $valor->ciudad ?></td>
             <td><?php echo $valor->direccion ?></td>
-            <td>
+            <td class="textC">
                 <form method="POST" action="/CentroStock/eliminar">
                     <input type="hidden" name="id" value="<?php echo $valor->id_centros_stock; ?>">
                     <input type="submit" class="boton-rojo-block" value="Eliminar">
@@ -45,4 +45,4 @@
     </tbody>
     
 </table>
-<a href="/CentroStock/crear">CREAR</a>
+<a class="btns crear" href="/CentroStock/crear">CREAR</a>

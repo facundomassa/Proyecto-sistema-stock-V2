@@ -9,10 +9,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>NOMBRE</th>
-            <th>OPERACION</th>
-            <th>ACCIONES</th>
+            <th class="width-1">ID</th>
+            <th class="width-4">NOMBRE</th>
+            <th class="width-3">OPERACION</th>
+            <th class="width-2">ACCIONES</th>
         </tr> 
     </thead>
     <tbody>
@@ -33,4 +33,4 @@
     </tbody>
     
 </table>
-<a href="/TipoCentroStock/crear">CREAR</a>
+<a class="btns crear" class="button" href="/TipoCentroStock/crear">CREAR</a>

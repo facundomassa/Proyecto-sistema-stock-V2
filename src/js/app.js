@@ -84,30 +84,26 @@ $(document).ready(function () {
                
                 <tbody class="tabla-cuerpo">
                     `);
-                    // $.each(respuesta.MovimientoMateriales, function (e) { console.log(respuesta.Materiales[e])});
-                    $.each(respuesta.MovimientoMateriales, function (mo){
-                        let MovimientoMateriale = respuesta.MovimientoMateriales[mo]
-                        console.log(MovimientoMateriale.material_id);
-                        $.each(respuesta.Materiales, function (ma) { 
-                            console.log(respuesta.Materiales[ma].id_materiales);
-                            console.log(MovimientoMateriale.material_id);
-                            // console.log(MovimientoMateriale)
-                            if(respuesta.Materiales[ma].id_materiales == MovimientoMateriale.material_id){
-                            $(".tabla-cuerpo").append(`
-                            <tr>
-                                <td>${respuesta.Materiales[ma].codigo}</td>
-                                <td>${respuesta.Materiales[ma].descripcion}</td>
-                                <td>${MovimientoMateriale.cantidad}</td>
-                                <td>
-                                </td>
-                            </tr>
-                            `)};
-                        });
+                // $.each(respuesta.MovimientoMateriales, function (e) { console.log(respuesta.Materiales[e])});
+                $.each(respuesta.MovimientoMateriales, function (mo){
+                    let MovimientoMateriale = respuesta.MovimientoMateriales[mo]
+                    $.each(respuesta.Materiales, function (ma) { 
+                        if(respuesta.Materiales[ma].id_materiales == MovimientoMateriale.material_id){
+                        $(".tabla-cuerpo").append(`
+                        <tr>
+                            <td>${respuesta.Materiales[ma].codigo}</td>
+                            <td>${respuesta.Materiales[ma].descripcion}</td>
+                            <td>${MovimientoMateriale.cantidad}</td>
+                            <td>
+                            </td>
+                        </tr>
+                        `)};
                     });
-                    conteniroRe.children(".tabla-cuerpo").append(
-                    `
-                </tbody>
-            </table>      
+                });
+                conteniroRe.append(`
+                    </tbody>
+                </table>     
+                <a href="/MovimientoMateriales/Crear?id=${idRe}">Modificar</a>
                 `);
                 materialesBtn.addClass("selected");
                 remitoBtn.removeClass("selected");

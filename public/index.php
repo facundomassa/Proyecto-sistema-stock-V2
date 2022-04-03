@@ -10,6 +10,8 @@ use Control\CentroStockControl;
 use Control\MaterialesControl;
 use Control\RemitoControl;
 use Control\MovimientoMaterialesControl;
+use Control\LoginControl;
+use Control\StockControl;
 use MVC\Router;
 
 
@@ -64,13 +66,23 @@ $router->get("/Materiales/buscar", [MaterialesControl::class, "buscarMateriales"
 $router->get("/Remito", [RemitoControl::class, "leer"]);
 $router->get("/Remito/crear", [RemitoControl::class, "crear"]);
 $router->post("/Remito/crear", [RemitoControl::class, "crear"]);
+$router->get("/Remito/actualizar", [RemitoControl::class, "actualizar"]);
+$router->post("/Remito/actualizar", [RemitoControl::class, "actualizar"]);
 $router->get("/Remito/ver", [RemitoControl::class, "ver"]);
 $router->get("/Remito/verAjax", [RemitoControl::class, "verAjax"]);
 $router->get("/Remito/verMateriales", [RemitoControl::class, "verMateriales"]);
 
 $router->get("/MovimientoMateriales", [MovimientoMaterialesControl::class, "leer"]);
 $router->get("/MovimientoMateriales/Crear", [MovimientoMaterialesControl::class, "crear"]);
+$router->post("/MovimientoMateriales/eliminar", [MovimientoMaterialesControl::class, "eliminar"]);
 $router->post("/MovimientoMateriales/Crear", [MovimientoMaterialesControl::class, "crearMultiples"]);
+
+$router->get("/Stock", [StockControl::class, "leer"]);
+$router->post("/Stock/FinalizarOrden", [StockControl::class, "finalizarOrden"]);
+
+$router->get("/", [LoginControl::class, "login"]);
+$router->post("/", [LoginControl::class, "login"]);
+$router->get("/logout", [LoginControl::class, "logout"]);
 
 
 $router->comprobarRutas();

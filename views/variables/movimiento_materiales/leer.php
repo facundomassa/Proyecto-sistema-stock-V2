@@ -9,14 +9,14 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Nº REMITO</th>
-            <th>DESDE</th>
-            <th>HASTA</th>
-            <th>COD. MATERIAL</th>
-            <th>MATERIAL</th>
-            <th>CANTIDAD</th>
-            <th>ACCIONES</th>
+            <th class="width-1">ID</th>
+            <th class="width-1">Nº REMITO</th>
+            <th class="width-1">DESDE</th>
+            <th class="width-1">HASTA</th>
+            <th class="width-2">COD. MATERIAL</th>
+            <th class="width-2">MATERIAL</th>
+            <th class="width-1">CANTIDAD</th>
+            <th class="width-1">ACCIONES</th>
         </tr> 
     </thead>
    
@@ -25,7 +25,7 @@
         <tr>
             <td><?php echo $valor->id_movimiento_materiales ?></td>
             <?PHP foreach($Remito as $Remit): 
-            if($Remit->id_remito == $valor->remito_id){echo '<td><a href=' . '"/Remito/actualizar?id=' . $Remit->id_remito . '">' . $Remit->id_remito . '</a></td>'; 
+            if($Remit->id_remito == $valor->remito_id){echo '<td><a href=' . '"/Remito/ver?id=' . $Remit->id_remito . '">' . $Remit->id_remito . '</a></td>'; 
                 foreach($CentrosStock as $CentroStock): 
                     if($CentroStock->id_centros_stock == $Remit->origen_id){echo "<td>{$CentroStock->nombre_cs}</td>";}
                 endforeach;
@@ -49,4 +49,3 @@
     </tbody>
     
 </table>
-<a href="/Remito/crear">CREAR</a>

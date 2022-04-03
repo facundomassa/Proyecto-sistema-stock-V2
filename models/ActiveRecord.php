@@ -58,7 +58,7 @@ class ActiveRecord{
         $query .= " ) VALUES (' "; 
         $query .= join("', '", array_values($newatributos));
         $query .= " ');";
-
+        
         $resultado = self::$bd->query($query);
 
         if ($resultado) {
@@ -93,12 +93,15 @@ class ActiveRecord{
         $atributos = $this->sanitizarAtributos();
         $valores = [];
         foreach($atributos as $key => $value){
+            if($key === "fecha_creacion"  && $value === "") continue;
+            if($key === "fecha_finalizado" && $value === "") continue;
             $valores[] = "{$key} ='{$value}'";
         }
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .=  join(', ', $valores);
         $query .= " WHERE ". static::$id_name ." = '" . self::$bd->escape_string($this->id) . "' ";
         $query .= " LIMIT 1 ;";
+        
         $resultado = self::$bd->query($query);
 
         if ($resultado) {
@@ -110,16 +113,20 @@ class ActiveRecord{
         $atributos = $this->sanitizarAtributos();
         $valores = [];
         foreach($atributos as $key => $value){
+            if($key === "fecha_creacion"  && $value === "") continue;
+            if($key === "fecha_finalizado" && $value === "") continue;
             $valores[] = "{$key} ='{$value}'";
         }
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .=  join(', ', $valores);
         $query .= " WHERE ". static::$id_name ." = '" . self::$bd->escape_string($this->id) . "' ";
         $query .= " LIMIT 1 ;";
+
         $resultado = self::$bd->query($query);
 
         if ($resultado) {
             echo "CORRECTO";
+            return "CORRECTO";
         }
     }
     //eliminar un registro
@@ -129,6 +136,15 @@ class ActiveRecord{
         $resultado = self::$bd->query($query);
         if($resultado){
             header("LOCATION: ". $url ."?mensaje=3");
+        }
+    }
+
+    public function eliminarMultiple(){
+        $query = "DELETE FROM ". static::$tabla . " WHERE ". static::$id_name ." = " . self::$bd->escape_string($this->id) . " LIMIT 1 ;";
+        
+        $resultado = self::$bd->query($query);
+        if($resultado){
+            echo "CORRECTO";
         }
     }
     //identificar y unir los atributos de la bd
@@ -199,6 +215,15 @@ class ActiveRecord{
         $resultado = self::consultarSQL($query);
         
         return $resultado;
+    }
+
+    //buscar por muchos datos
+    public static function findVariosDatos($id_1, $nombreDato_1, $id_2, $nombreDato_2){
+        $query = "SELECT * FROM ". static::$tabla . " WHERE ". $nombreDato_1 ." = " . self::$bd->escape_string($id_1) . " AND " . $nombreDato_2 . " = " .  self::$bd->escape_string($id_2) . ";";
+        
+        $resultado = self::consultarSQL($query);
+        
+        return array_shift($resultado);
     }
 
     //enviar el query a la bd

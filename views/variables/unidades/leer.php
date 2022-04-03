@@ -9,9 +9,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>UNIDAD</th>
-            <th>ACCIONES</th>
+            <th class="width-2">ID</th>
+            <th class="width-6">UNIDAD</th>
+            <th class="width-2">ACCIONES</th>
         </tr> 
     </thead>
     <tbody>
@@ -31,4 +31,4 @@
     </tbody>
     
 </table>
-<a href="/Unidades/crear">CREAR</a>
+<a class="btns crear" href="/Unidades/crear">CREAR</a>

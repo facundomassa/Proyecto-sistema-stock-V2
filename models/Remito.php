@@ -63,6 +63,8 @@ class Remito extends ActiveRecord{
         $objeto->id = $objeto->id_remito ;
         return $objeto;
     }
+
+
 }
 
 ?>

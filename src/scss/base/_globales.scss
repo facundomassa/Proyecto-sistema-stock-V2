@@ -18,6 +18,7 @@ p {
     width: 95%;
     max-width: 150rem;
     margin: 0 auto;
+    clear: both;
 }
 
 a {
@@ -31,9 +32,9 @@ picture {
 }
 
 h1, h2, h3 {
-    font-family: $fuente_principal;
-    margin: $separacion / 2 0;
-    font-weight: 300;
+    font-family: $fuente_secundaria;
+    margin: 2.5rem 0;
+    font-weight: 700;
     text-align: center;
     
 }
@@ -49,4 +50,30 @@ h3 {
 }
 h4 {
     font-size: 2.6rem;
+}
+
+.width-1{
+    width: 10% !important;
+}
+.width-2{
+    width: 20% !important;
+}
+.width-3{
+    width: 30% !important;
+}
+.width-4{
+    width: 40% !important;
+}
+.width-5{
+    width: 50% !important;
+}
+.width-6{
+    width: 60% !important;
+}
+
+.textC{
+    text-align: center;
+}
+thead tr th{
+    font-family: $fuente_secundaria;
 }
