@@ -64,6 +64,7 @@ $router->post("/Materiales/eliminar", [MaterialesControl::class, "eliminar"]);
 $router->get("/Materiales/buscar", [MaterialesControl::class, "buscarMateriales"]);
 
 $router->get("/Remito", [RemitoControl::class, "leer"]);
+$router->get("/Imprimir", [RemitoControl::class, "imprimir"]);
 $router->get("/Remito/crear", [RemitoControl::class, "crear"]);
 $router->post("/Remito/crear", [RemitoControl::class, "crear"]);
 $router->get("/Remito/actualizar", [RemitoControl::class, "actualizar"]);

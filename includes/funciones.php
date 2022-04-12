@@ -42,4 +42,20 @@ function debuguear($variable){
     echo "</pre>";
     exit;
 }
+
+
+function imprimir($direccion){
+    $direccionImprimir = $_SERVER["DOCUMENT_ROOT"] . $direccion;
+    $dompdf = new Dompdf();
+    ob_start();
+    echo file_get_contents($direccionImprimir);
+    $html = ob_get_clean();
+    $dompdf->loadHtml($html);
+    $dompdf->render();
+    header("Content-type: application/pdf");
+    header("Content-Disposition: inline; filename=documento.pdf");
+    echo $dompdf->output();
+}
+
+
 ?>

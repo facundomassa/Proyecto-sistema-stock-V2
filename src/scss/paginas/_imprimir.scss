@@ -1,0 +1,133 @@
+.head-imp{
+    font-family: $fuente_secundaria;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    .logo{
+        height: 150px;
+        width: 150px;
+    }
+    .datos{
+        background-color: aliceblue;
+        border: 1px black solid;
+        text-align: center;
+        padding: 1rem;
+        p{
+            margin: 1rem 0;
+        }
+    }
+}
+.separador{
+    width: 100%;
+    &::after{
+        content: " ";
+        background-color: rgba(128, 128, 128, 0.5);
+        height: 3px;
+        border-radius: .5rem;
+        display: block;
+        margin: 1rem;
+    }
+}
+.imp-destinos{
+    display: flex;
+    line-height: 1;
+}
+.imp-centros{
+    font-family: $fuente_secundaria;
+    margin: 0 1rem;
+    h2{
+        font-size: 20px;
+        text-align: left;
+        margin: 0;
+    }
+    p{
+        font-size: 1.6rem;
+        margin: 0;
+        font-weight: bold;
+        span{
+            font-weight: lighter;
+            font-size: 1.8rem;
+        }
+    }
+}
+.footer-imp{
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 5rem;
+    .firma{
+        width: 20%;
+        text-align: center;
+        
+        p{
+            font-size: 1.8rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        &::before{
+            content: " ";
+            height: 1px;
+            width: 100%;
+            background-color: gray;
+            display: block;
+        }
+    }
+}
+.tabla-cont{
+    height: 59rem;
+    border: 1px solid black;
+    .table{
+        border-radius: 0;
+        background-color: transparent;
+        border: 0;
+        thead{
+            background-color: lightgray;
+            line-height: 1;
+        }
+        tr{
+            line-height: 1;
+        }
+    }
+
+}
+.detalle-imp{
+    font-family: $fuente_secundaria;
+    display: flex;
+    margin: 0;
+    justify-content: space-between;
+    p{
+        color: gray;
+        font-size: 1.6rem;
+        margin: 1rem 2rem;
+    }
+}
+.cont-mayor{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.conta-imp {
+    height: 70vh;
+    max-width: 90rem;
+    position: relative;
+    margin: auto;
+    width: 90%;
+    background-color: white;
+    .contenido-imprimir{
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        
+    }
+ }
+ 

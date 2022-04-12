@@ -22,92 +22,94 @@ $(document).ready(function () {
         main.toggleClass("show");
     }
 
+
+    //---FUNCION ANTIGUA PARA USAR AJAX EN LA PAGINA VER REMITO----//
     //remito
-    const remitoBtn = $("#remito");
-    const materialesBtn = $("#materiales");
-    const conteniroRe = $(".contenido-remito")
+    // const remitoBtn = $("#remito");
+    // const materialesBtn = $("#materiales");
+    // const conteniroRe = $(".contenido-remito")
 
-    remitoBtn.click(function(){
-        const idRe = remitoBtn.attr("data-id");
-        $.ajax({
-            type: "get",
-            url: "/Remito/verAjax",
-            data: { id: idRe},
-            success: function (response) {
-                let respuesta = response;
-                respuesta = JSON.parse(respuesta);
-                conteniroRe.empty().append(`<div class="content">
-                <p>Numero de remito: <span>${respuesta.Remito.id_remito}</span></p>
-            </div>
-            <div class="content">
-                <p>Origen: ${respuesta.Origen.nombre_cs}</span></p>
-                <p>Direccion: <span>${respuesta.Origen.direccion}</span></p>
-            </div>
-            <div class="content">
-                <p>Destino: ${respuesta.Destino.nombre_cs}</span></p>
-                <p>Direccion: <span>${respuesta.Destino.direccion}</span></p>
-            </div>
-            <div class="content">
-                <p>Fecha de creaccion: <span>${respuesta.Remito.fecha_creacion}</span></p>
-                <p>Fecha de finalizado: <span>${respuesta.Remito.fecha_finalizado}</span></p>
-                <p>Creado por: ${respuesta.Usuarios.nombre}</span></p>
-            </div>
-            <div class="content">
-                <p>Estado del remito: ${respuesta.Estado.estado}</span></p>
-            </div>`);
-                // console.log(respuesta.Origen.id_centros_stock);
-                remitoBtn.addClass("selected");
-                materialesBtn.removeClass("selected");
-            }
-        });
-    })
+    // remitoBtn.click(function(){
+    //     const idRe = remitoBtn.attr("data-id");
+    //     $.ajax({
+    //         type: "get",
+    //         url: "/Remito/verAjax",
+    //         data: { id: idRe},
+    //         success: function (response) {
+    //             let respuesta = response;
+    //             respuesta = JSON.parse(respuesta);
+    //             conteniroRe.empty().append(`<div class="content">
+    //             <p>Numero de remito: <span>${respuesta.Remito.id_remito}</span></p>
+    //         </div>
+    //         <div class="content">
+    //             <p>Origen: ${respuesta.Origen.nombre_cs}</span></p>
+    //             <p>Direccion: <span>${respuesta.Origen.direccion}</span></p>
+    //         </div>
+    //         <div class="content">
+    //             <p>Destino: ${respuesta.Destino.nombre_cs}</span></p>
+    //             <p>Direccion: <span>${respuesta.Destino.direccion}</span></p>
+    //         </div>
+    //         <div class="content">
+    //             <p>Fecha de creaccion: <span>${respuesta.Remito.fecha_creacion}</span></p>
+    //             <p>Fecha de finalizado: <span>${respuesta.Remito.fecha_finalizado}</span></p>
+    //             <p>Creado por: ${respuesta.Usuarios.nombre}</span></p>
+    //         </div>
+    //         <div class="content">
+    //             <p>Estado del remito: ${respuesta.Estado.estado}</span></p>
+    //         </div>`);
+    //             // console.log(respuesta.Origen.id_centros_stock);
+    //             remitoBtn.addClass("selected");
+    //             materialesBtn.removeClass("selected");
+    //         }
+    //     });
+    // })
 
-    materialesBtn.click(function(){
-        const idRe = remitoBtn.attr("data-id");
-        $.ajax({
-            type: "get",
-            url: "/Remito/verMateriales",
-            data: { id: idRe},
-            success: function (response) {
-                let respuesta = response;
-                respuesta = JSON.parse(respuesta);
-                conteniroRe.empty().append(`
-                <table class="table">
-                <thead>
-                    <tr>
-                        <th>COD. MATERIAL</th>
-                        <th>MATERIAL</th>
-                        <th>CANTIDAD</th>
-                        <th>ACCIONES</th>
-                    </tr> 
-                </thead>
+    // materialesBtn.click(function(){
+    //     const idRe = remitoBtn.attr("data-id");
+    //     $.ajax({
+    //         type: "get",
+    //         url: "/Remito/verMateriales",
+    //         data: { id: idRe},
+    //         success: function (response) {
+    //             let respuesta = response;
+    //             respuesta = JSON.parse(respuesta);
+    //             conteniroRe.empty().append(`
+    //             <table class="table">
+    //             <thead>
+    //                 <tr>
+    //                     <th>COD. MATERIAL</th>
+    //                     <th>MATERIAL</th>
+    //                     <th>CANTIDAD</th>
+    //                     <th>ACCIONES</th>
+    //                 </tr> 
+    //             </thead>
                
-                <tbody class="tabla-cuerpo">
-                    `);
-                // $.each(respuesta.MovimientoMateriales, function (e) { console.log(respuesta.Materiales[e])});
-                $.each(respuesta.MovimientoMateriales, function (mo){
-                    let MovimientoMateriale = respuesta.MovimientoMateriales[mo]
-                    $.each(respuesta.Materiales, function (ma) { 
-                        if(respuesta.Materiales[ma].id_materiales == MovimientoMateriale.material_id){
-                        $(".tabla-cuerpo").append(`
-                        <tr>
-                            <td>${respuesta.Materiales[ma].codigo}</td>
-                            <td>${respuesta.Materiales[ma].descripcion}</td>
-                            <td>${MovimientoMateriale.cantidad}</td>
-                            <td>
-                            </td>
-                        </tr>
-                        `)};
-                    });
-                });
-                conteniroRe.append(`
-                    </tbody>
-                </table>     
-                <a href="/MovimientoMateriales/Crear?id=${idRe}">Modificar</a>
-                `);
-                materialesBtn.addClass("selected");
-                remitoBtn.removeClass("selected");
-            }
-        });
-    })
+    //             <tbody class="tabla-cuerpo">
+    //                 `);
+    //             // $.each(respuesta.MovimientoMateriales, function (e) { console.log(respuesta.Materiales[e])});
+    //             $.each(respuesta.MovimientoMateriales, function (mo){
+    //                 let MovimientoMateriale = respuesta.MovimientoMateriales[mo]
+    //                 $.each(respuesta.Materiales, function (ma) { 
+    //                     if(respuesta.Materiales[ma].id_materiales == MovimientoMateriale.material_id){
+    //                     $(".tabla-cuerpo").append(`
+    //                     <tr>
+    //                         <td>${respuesta.Materiales[ma].codigo}</td>
+    //                         <td>${respuesta.Materiales[ma].descripcion}</td>
+    //                         <td>${MovimientoMateriale.cantidad}</td>
+    //                         <td>
+    //                         </td>
+    //                     </tr>
+    //                     `)};
+    //                 });
+    //             });
+    //             conteniroRe.append(`
+    //                 </tbody>
+    //             </table>     
+    //             <a href="/MovimientoMateriales/Crear?id=${idRe}">Modificar</a>
+    //             `);
+    //             materialesBtn.addClass("selected");
+    //             remitoBtn.removeClass("selected");
+    //         }
+    //     });
+    // })
 });

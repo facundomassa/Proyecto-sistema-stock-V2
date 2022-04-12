@@ -77,7 +77,7 @@ class StockControl{
         $Remito = Remito::findID($id);
         
         if($Remito->fecha_finalizado == ""){
-            debuguear("falta fecha");
+            header ("LOCATION: /Remito/ver?id=" . $id . "&e=ff");
         } else if($Remito->estado_id != 3 || $Remito->estado_id != 5){
             
             $Remito->estado_id = 3;

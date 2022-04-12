@@ -48,14 +48,17 @@ class Router {
     }
 
     //muestra una vista
-    public function render($view, $datos = []){
+    public function render($view, $datos = [],$imprimir = false){
         foreach($datos as $key => $value){
             $$key = $value;
         }
-
         ob_start(); //almacenar en memoria durante un tiiempo
         include __DIR__ . "/views/$view.php";
         $contenido = ob_get_clean(); // limpiar el buffer
-        include __DIR__ . "/views/layout.php";
+        if(!$imprimir){
+            include __DIR__ . "/views/layout.php";
+        } else {
+            echo $contenido;
+        }
     }
 }

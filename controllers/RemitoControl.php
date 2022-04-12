@@ -9,6 +9,7 @@ use Model\Usuarios;
 use Model\Estados;
 use Model\MovimientoMateriales;
 use Model\Materiales;
+use Model\Unidades;
 
 class RemitoControl{
 
@@ -28,26 +29,71 @@ class RemitoControl{
 
         $id = validarID("/Remito");
 
+        if(isset($_GET["R"])){
+            $r = $_GET["R"];
+        }
+        $r = isset($r) ? $r : "REM";
         $Remito = Remito::findID($id);
+        $Estados = Estados::findID($Remito->estado_id);
 
+        if($r == "MAT"){
+            $Materiales = Materiales::getAll();
+            $MovimientoMateriales = MovimientoMateriales::findDatos($id, "remito_id");
+            foreach($MovimientoMateriales as $key => $value){
+                $MovimientoMateriales[$key]->Materiales = Materiales::findID($value->material_id);
+            }
+            $router->render("variables/remito/verMateriales",[
+                "Remito" => $Remito,
+                "Estado" => $Estados,
+                "MovimientoMateriales" => $MovimientoMateriales,
+                "Materiales" => $Materiales,
+                "errores" => $errores
+            ]);
+        } else{
+            $Origen = CentrosStock::findID($Remito->origen_id);
+            $Destino = CentrosStock::findID($Remito->destino_id);
+            $Usuarios = Usuarios::findID($Remito->creado_por_id);
+            $UsuariosN = $Usuarios->nombre;
+            $router->render("variables/remito/verRemito",[
+                "Remito" => $Remito,
+                "Origen" => $Origen,
+                "Destino" => $Destino,
+                "Usuarios" => $UsuariosN,
+                "Estado" => $Estados,
+                "errores" => $errores
+            ]);
+        }
+    }
+
+    public static function imprimir(Router $router){
+
+        $errores = Remito::getErorres();
+
+        $id = validarID("/Remito");
+
+        $Remito = Remito::findID($id);
+        $Estados = Estados::findID($Remito->estado_id);
+        $Materiales = Materiales::getAll();
+        $MovimientoMateriales = MovimientoMateriales::findDatos($id, "remito_id");
+        foreach($MovimientoMateriales as $key => $value){
+            $MovimientoMateriales[$key]->Materiales = Materiales::findID($value->material_id);
+            $MovimientoMateriales[$key]->Unidades = Unidades::findID($MovimientoMateriales[$key]->Materiales->unidad_id);
+        }
         $Origen = CentrosStock::findID($Remito->origen_id);
         $Destino = CentrosStock::findID($Remito->destino_id);
         $Usuarios = Usuarios::findID($Remito->creado_por_id);
         $UsuariosN = $Usuarios->nombre;
-        $Estados = Estados::findID($Remito->estado_id);
-        $Materiales = Materiales::getAll();
-        $MovimientoMateriales = MovimientoMateriales::findDatos($id, "remito_id");
-        
-        $router->render("variables/remito/ver",[
+
+        $router->render("variables/remito/imprimir",[
+            "MovimientoMateriales" => $MovimientoMateriales,
+            "Materiales" => $Materiales,
             "Remito" => $Remito,
             "Origen" => $Origen,
             "Destino" => $Destino,
             "Usuarios" => $UsuariosN,
             "Estado" => $Estados,
-            "MovimientoMateriales" => $MovimientoMateriales,
-            "Materiales" => $Materiales,
             "errores" => $errores
-        ]);
+        ], true);
     }
 
     public static function verAjax(){
@@ -172,8 +218,7 @@ class RemitoControl{
                     $errores[] = "Usuario incorrecto";
                 } else{
                     //insertamos
-                    
-                    $Remito->guardar("/Remito/ver?id=" . $NumeroRemito);
+                    $Remito->guardar("/Remito/ver?id=" . $id, true);
                 }
                 
             }

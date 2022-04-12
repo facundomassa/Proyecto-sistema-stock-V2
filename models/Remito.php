@@ -64,7 +64,14 @@ class Remito extends ActiveRecord{
         return $objeto;
     }
 
-
+    public static function getErorres(){
+        if(isset($_GET["e"])){
+            if($_GET["e"] == "ff"){
+                self::$errores[] = "Falta fecha finalizado";
+            }
+        }
+        return static::$errores;
+    }
 }
 
 ?>

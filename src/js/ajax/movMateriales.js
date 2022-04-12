@@ -55,7 +55,7 @@ $(document).ready(function () {
                         <td><input type="number" name="MovimientoMateriales[cantidad]" id="cantidad" min="0"></td>
                         <td>
                         <input type="button" value="Eliminar" class="eliminarMaterial" onclick="EliminarMaterial(this);">
-                            <input type="checkbox" name="MovimientoMateriales[eliminar]" id="eliminarChek" value="">
+                            <input type="checkbox" name="MovimientoMateriales[eliminar]" id="eliminarChek" class="oculto">
                         </td>
                     </tr>
                     `);

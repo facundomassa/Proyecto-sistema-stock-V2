@@ -7,7 +7,8 @@
             "Facundo\\ProyectoSistemaStockV2\\": "src/",
             "Model\\" : "./models",
             "MVC\\" : "./",
-            "Control\\" : "./controllers"
+            "Control\\" : "./controllers",
+            "Dompdf\\" : "./vendor/dompdf"
         }
     },
     "authors": [
@@ -16,5 +17,7 @@
             "email": "massafacundo11@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "dompdf/dompdf": "^1.2"
+    }
 }

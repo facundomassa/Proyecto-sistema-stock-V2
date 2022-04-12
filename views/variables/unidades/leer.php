@@ -19,12 +19,12 @@
         <tr>
             <td><?php echo $valor->id ?></td>
             <td><?php echo $valor->unidad ?></td>
-            <td>
+            <td class="linea-butons-center">  
+                <a class="btns btn-actualizar" href="/Unidades/actualizar?id=<?php echo $valor->id; ?>">Actualizar</a>
                 <form method="POST" action="/Unidades/eliminar">
                     <input type="hidden" name="id" value="<?php echo $valor->id; ?>">
-                    <input type="submit" class="boton-rojo-block" value="Eliminar">
-                </form>    
-                <a href="/Unidades/actualizar?id=<?php echo $valor->id; ?>">Actualizar</a>
+                    <button type="submit" class="btns btn-eliminar"><i class='bx bx-trash'></i></button>
+                </form>  
             </td>
         </tr>
         <?PHP } ?>

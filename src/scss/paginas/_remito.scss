@@ -7,6 +7,7 @@
         color: rebeccapurple;
     }
     &.selected{
+        pointer-events: none;
         background: blue;
     }
 }
@@ -38,4 +39,7 @@
         display: block;
         margin: 2rem;
     }
+}
+.oculto{
+    display: none;
 }

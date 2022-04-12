@@ -3,9 +3,7 @@
         session_start();
     }
     $auth = $_SESSION["login"] ?? null;
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,13 +61,26 @@
             </li>
         </ul>
         <div class="logout">
-            <a class="btns btn-cerrarS" href="/logout">Cerrar Seccion</a>
+            <a class="btns btn-cerrarS" href="/logout"><i class='bx bx-log-out'></i>Cerrar Seccion</a>
         </div>
     </nav>
     
     <main class="main">
         <img class="volver" onClick="history.go(-1);" src="/build/img/flecha-return.png" alt="volver atras">
         <div class="contenedor">
+        <?php 
+        $resultado = $_GET["mensaje"] ?? null;
+        if(isset($resultado)) { 
+            $mensaje = mostrarNotificacion(intval($resultado));
+            ?> <p class="alerta exito"><?php echo s($mensaje) ?> </p> <?php
+        } 
+        if(isset($errores)){
+            foreach ($errores as $error) { ?>
+            <div class="alerta error">
+            <i class='bx bxs-error'></i>
+                <?php echo $error; ?>
+            </div>
+        <?php }}?>
             <?php echo $contenido; ?>
         </div>
     </main>

@@ -37,7 +37,7 @@
                 <td>
                     <input type="button" value="Eliminar" class="eliminarMaterial" onclick="EliminarMaterial(this);">
                     <input type="hidden" name="MovimientoMateriales[id_movimiento_materiales]" id="MovimientoMateriales" value="<?php echo $MaterialesEnviado->id_movimiento_materiales ?>">
-                    <input type="checkbox" name="MovimientoMateriales[eliminar]" id="eliminarChek" value="<?php echo $MaterialesEnviado->id_movimiento_materiales ?>">
+                    <input type="checkbox" class="oculto" name="MovimientoMateriales[eliminar]" id="eliminarChek" value="<?php echo $MaterialesEnviado->id_movimiento_materiales ?>">
                 </td>
             </tr>
             <?PHP } ?>
@@ -45,9 +45,11 @@
     </table>
     <button id="agregarMat">Agregar mas materiales</button>
     </div>
-    <input class="btns guardar" type="submit" value="Guardar cambios" id="enviarMateriales">
-    <a class="btns descartar" href="/Remito/ver?id=<?php echo $_GET["id"]?>">Descartar cambios</a>
-</form>
+    <div class="linea-butons">
+        <input class="btns guardar" type="submit" value="Guardar cambios" id="enviarMateriales">
+        <a class="btns descartar" href="/Remito/ver?id=<?php echo $_GET["id"]?>">Descartar cambios</a>
+    </div>
+    </form>
 
 <div id="ayuda" class="hidden">
     <table class="table">

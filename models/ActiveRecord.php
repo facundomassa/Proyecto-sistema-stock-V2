@@ -18,15 +18,15 @@ class ActiveRecord{
         self::$bd = $dataBase;
     }
 
-    public function guardar($url = "/"){
+    public function guardar($url = "/", $otroValor = false){
         if(!is_null($this->id)){
             //actualizar
             
-            $this->actualizar($url);
+            $this->actualizar($url, $otroValor);
             
         } else {
             //crear
-            $this->crear($url);
+            $this->crear($url, $otroValor);
         }
     }
 
@@ -66,7 +66,7 @@ class ActiveRecord{
         }
     }
 
-    public function crear($url){
+    public function crear($url, $otroValor){
 
         //sanitizar los datos
         $atributos = $this->sanitizarAtributos();
@@ -85,11 +85,15 @@ class ActiveRecord{
 
         $resultado = self::$bd->query($query);
         if ($resultado) {
-            header("Location: ". $url ."?mensaje=1");
+            if($otroValor){
+                header("Location: ". $url ."&mensaje=1");
+            } else {
+                header("Location: ". $url ."?mensaje=1");
+            }
         }
     }
 
-    public function actualizar($url){
+    public function actualizar($url, $otroValor){
         $atributos = $this->sanitizarAtributos();
         $valores = [];
         foreach($atributos as $key => $value){
@@ -105,7 +109,11 @@ class ActiveRecord{
         $resultado = self::$bd->query($query);
 
         if ($resultado) {
-            header("Location: ". $url ."?mensaje=2");
+            if($otroValor){
+                header("Location: ". $url ."&mensaje=2");
+            } else {
+                header("Location: ". $url ."?mensaje=2");
+            }
         }
     }
 
