@@ -45,4 +45,3 @@
         <iframe class="contenido-imprimir" src="http://www.localhost:3000/Imprimir?id=<?php echo $Remito->id_remito ?>" frameborder="0"></iframe>
     </div>
 </div>
-<img src="http://<?php echo $_SERVER["HTTP_HOST"]?>/build/img/logo-cripto.webp" alt="">
